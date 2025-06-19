@@ -1,0 +1,907 @@
+<?xml version="1.0"?>
+<robot name="Sawyer">
+    <link name="robot_base">
+        <collision name="Sawyer">
+            <origin xyz="-0.061583 0.000222 -0.004274" rpy="-1.565641 3.167778 0.000004" />
+            <geometry>
+                <box size="0.024981 0.057284 0.101235" />
+            </geometry>
+        </collision>
+        <collision name="Sawyer">
+            <origin xyz="0.000000 -0.000000 -0.035250" rpy="-3.141593 3.141593 3.025313" />
+            <geometry>
+                <cylinder length="0.02348911203444" radius="0.10469901561737" />
+            </geometry>
+        </collision>
+        <collision name="Sawyer">
+            <origin xyz="0.000048 0.000164 0.009506" rpy="-3.141593 3.141593 -2.635084" />
+            <geometry>
+                <cylinder length="0.074975840747356" radius="0.068254493176937" />
+            </geometry>
+        </collision>
+        <visual name="link0_visible">
+            <origin xyz="-0.000044 0.000165 0.000000" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link0_visible_vis_1.dae" />
+            </geometry>
+            <material name="link0_visible_material">
+                <color rgba="0.704000 0.228000 0.237000 1.0" />
+            </material>
+        </visual>
+        <visual name="link0_visible">
+            <origin xyz="-0.000044 0.000165 0.000000" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link0_visible_vis_2.dae" />
+            </geometry>
+            <material name="link0_visible_material">
+                <color rgba="1.000000 1.000000 1.000000 1.0" />
+            </material>
+        </visual>
+    </link>
+    <joint name="right_j6" type="revolute">
+        <axis xyz="0 0 1" />
+        <limit effort="80.0" velocity="1.4800392389297" upper="3.0502998828888" lower="-3.0502998828888" />
+        <parent link="robot_base" />
+        <child link="link" />
+        <origin xyz="0.000123 0.000119 0.039506" rpy="-3.141593 3.141593 -3.141593" />
+    </joint>
+    <link name="link">
+        <inertial>
+            <origin xyz="0.033711 0.004217 0.157691" rpy="-3.141593 3.141593 -3.141593" />
+            <inertia izz="0.0089860472401214" ixy="-0.00070674268104625" ixx="0.019456338963696" iyz="-0.0006926241220191" iyy="0.021558141359802" ixz="-0.0029251052098216" />
+            <mass value="2.0" />
+        </inertial>
+        <collision name="link">
+            <origin xyz="0.040589 -0.004048 0.155977" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link_coll_1.dae" />
+            </geometry>
+        </collision>
+        <collision name="link">
+            <origin xyz="0.040589 -0.004048 0.155977" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link_coll_2.dae" />
+            </geometry>
+        </collision>
+        <collision name="link">
+            <origin xyz="0.040589 -0.004048 0.155977" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link_coll_3.dae" />
+            </geometry>
+        </collision>
+        <collision name="link">
+            <origin xyz="0.040589 -0.004048 0.155977" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link_coll_4.dae" />
+            </geometry>
+        </collision>
+        <collision name="link">
+            <origin xyz="0.040589 -0.004048 0.155977" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link_coll_5.dae" />
+            </geometry>
+        </collision>
+        <collision name="link">
+            <origin xyz="0.040589 -0.004048 0.155977" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link_coll_6.dae" />
+            </geometry>
+        </collision>
+        <visual name="link1_visible">
+            <origin xyz="0.040480 -0.004001 0.156000" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link1_visible_vis_1.dae" />
+            </geometry>
+            <material name="link1_visible_material">
+                <color rgba="0.704000 0.228000 0.237000 1.0" />
+            </material>
+        </visual>
+        <visual name="link1_visible">
+            <origin xyz="0.040480 -0.004001 0.156000" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link1_visible_vis_2.dae" />
+            </geometry>
+            <material name="link1_visible_material">
+                <color rgba="0.440000 0.440000 0.440000 1.0" />
+            </material>
+        </visual>
+        <visual name="link1_visible">
+            <origin xyz="0.040480 -0.004001 0.156000" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link1_visible_vis_3.dae" />
+            </geometry>
+            <material name="link1_visible_material">
+                <color rgba="0.750000 0.750000 0.750000 1.0" />
+            </material>
+        </visual>
+        <visual name="link1_visible">
+            <origin xyz="0.040480 -0.004001 0.156000" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link1_visible_vis_4.dae" />
+            </geometry>
+            <material name="link1_visible_material">
+                <color rgba="1.000000 1.000000 1.000000 1.0" />
+            </material>
+        </visual>
+        <visual name="link1_visible">
+            <origin xyz="0.040480 -0.004001 0.156000" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link1_visible_vis_5.dae" />
+            </geometry>
+            <material name="link1_visible_material">
+                <color rgba="0.170000 0.170000 0.170000 1.0" />
+            </material>
+        </visual>
+        <visual name="link1_visible">
+            <origin xyz="0.040480 -0.004001 0.156000" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link1_visible_vis_6.dae" />
+            </geometry>
+            <material name="link1_visible_material">
+                <color rgba="0.130000 0.130000 0.130000 1.0" />
+            </material>
+        </visual>
+        <visual name="link1_visible">
+            <origin xyz="0.040480 -0.004001 0.156000" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link1_visible_vis_7.dae" />
+            </geometry>
+            <material name="link1_visible_material">
+                <color rgba="1.000000 1.000000 1.000000 1.0" />
+            </material>
+        </visual>
+    </link>
+    <joint name="headJoint" type="revolute">
+        <axis xyz="0 0 1" />
+        <limit effort="8.0" velocity="1.7999579906464" upper="0.95590019226074" lower="-5.1476998329163" />
+        <parent link="link" />
+        <child link="head" />
+        <origin xyz="-0.000000 0.000003 0.307379" rpy="-3.141593 3.141593 -3.141593" />
+    </joint>
+    <link name="head">
+        <inertial>
+            <origin xyz="0.007337 -0.000612 0.105281" rpy="-3.141593 3.141593 -3.141593" />
+            <inertia izz="0.0036909309756838" ixy="4.2151742281299e-06" ixx="0.007329960696554" iyz="-3.7658116078713e-06" iyy="0.0044455648034144" ixz="4.9169845905157e-05" />
+            <mass value="1.0" />
+        </inertial>
+        <collision name="head">
+            <origin xyz="0.000005 -0.000937 0.110496" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_head_coll_1.dae" />
+            </geometry>
+        </collision>
+        <collision name="head">
+            <origin xyz="0.000005 -0.000937 0.110496" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_head_coll_2.dae" />
+            </geometry>
+        </collision>
+        <collision name="head">
+            <origin xyz="0.000005 -0.000937 0.110496" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_head_coll_3.dae" />
+            </geometry>
+        </collision>
+        <collision name="head">
+            <origin xyz="0.000005 -0.000937 0.110496" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_head_coll_4.dae" />
+            </geometry>
+        </collision>
+        <visual name="head_visible">
+            <origin xyz="0.000004 -0.000937 0.104121" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_head_visible_vis_1.dae" />
+            </geometry>
+            <material name="head_visible_material">
+                <color rgba="0.704000 0.228000 0.237000 1.0" />
+            </material>
+        </visual>
+        <visual name="head_visible">
+            <origin xyz="0.000004 -0.000937 0.104121" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_head_visible_vis_2.dae" />
+            </geometry>
+            <material name="head_visible_material">
+                <color rgba="0.170000 0.170000 0.170000 1.0" />
+            </material>
+        </visual>
+        <visual name="head_visible">
+            <origin xyz="0.000004 -0.000937 0.104121" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_head_visible_vis_3.dae" />
+            </geometry>
+            <material name="head_visible_material">
+                <color rgba="0.170000 0.170000 0.170000 1.0" />
+            </material>
+        </visual>
+        <visual name="head_visible">
+            <origin xyz="0.000004 -0.000937 0.104121" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_head_visible_vis_4.dae" />
+            </geometry>
+            <material name="head_visible_material">
+                <color rgba="1.000000 1.000000 1.000000 1.0" />
+            </material>
+        </visual>
+        <visual name="head_visible">
+            <origin xyz="0.000004 -0.000937 0.104121" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_head_visible_vis_5.dae" />
+            </geometry>
+            <material name="head_visible_material">
+                <color rgba="0.330000 0.330000 0.330000 1.0" />
+            </material>
+        </visual>
+        <visual name="head_visible">
+            <origin xyz="0.000004 -0.000937 0.104121" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_head_visible_vis_6.dae" />
+            </geometry>
+            <material name="head_visible_material">
+                <color rgba="1.000000 1.000000 1.000000 1.0" />
+            </material>
+        </visual>
+    </link>
+    <joint name="right_j7" type="revolute">
+        <axis xyz="0 0 1" />
+        <limit effort="80.0" velocity="1.1299260854721" upper="2.282399892807" lower="-3.8183000087738" />
+        <parent link="link" />
+        <child link="link_2" />
+        <origin xyz="0.081000 0.061000 0.230500" rpy="-1.570796 1.570796 0.000000" />
+    </joint>
+    <link name="link_2">
+        <inertial>
+            <origin xyz="0.000013 -0.033228 0.095590" rpy="-1.570833 3.141630 -3.141593" />
+            <inertia izz="0.0027528382835295" ixy="-1.4810560972341e-06" ixx="0.0044297449083937" iyz="-0.0005623497610586" iyy="0.0036004497403229" ixz="8.7961746973671e-07" />
+            <mass value="1.0" />
+        </inertial>
+        <collision name="link">
+            <origin xyz="-0.000003 -0.034555 0.098756" rpy="-1.570833 3.141630 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link_2_coll_1.dae" />
+            </geometry>
+        </collision>
+        <collision name="link">
+            <origin xyz="-0.000003 -0.034555 0.098756" rpy="-1.570833 3.141630 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link_2_coll_2.dae" />
+            </geometry>
+        </collision>
+        <collision name="link">
+            <origin xyz="-0.000003 -0.034555 0.098756" rpy="-1.570833 3.141630 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link_2_coll_3.dae" />
+            </geometry>
+        </collision>
+        <collision name="link">
+            <origin xyz="-0.000003 -0.034555 0.098756" rpy="-1.570833 3.141630 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link_2_coll_4.dae" />
+            </geometry>
+        </collision>
+        <collision name="link">
+            <origin xyz="-0.000003 -0.034555 0.098756" rpy="-1.570833 3.141630 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link_2_coll_5.dae" />
+            </geometry>
+        </collision>
+        <collision name="link">
+            <origin xyz="-0.000003 -0.034555 0.098756" rpy="-1.570833 3.141630 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link_2_coll_6.dae" />
+            </geometry>
+        </collision>
+        <visual name="link2_visible">
+            <origin xyz="-0.000003 -0.034555 0.098781" rpy="-1.570833 3.141630 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link2_visible_vis_1.dae" />
+            </geometry>
+            <material name="link2_visible_material">
+                <color rgba="0.170000 0.170000 0.170000 1.0" />
+            </material>
+        </visual>
+        <visual name="link2_visible">
+            <origin xyz="-0.000003 -0.034555 0.098781" rpy="-1.570833 3.141630 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link2_visible_vis_2.dae" />
+            </geometry>
+            <material name="link2_visible_material">
+                <color rgba="1.000000 1.000000 1.000000 1.0" />
+            </material>
+        </visual>
+        <visual name="link2_visible">
+            <origin xyz="-0.000003 -0.034555 0.098781" rpy="-1.570833 3.141630 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link2_visible_vis_3.dae" />
+            </geometry>
+            <material name="link2_visible_material">
+                <color rgba="0.704000 0.228000 0.237000 1.0" />
+            </material>
+        </visual>
+    </link>
+    <joint name="right_j8" type="revolute">
+        <axis xyz="0 0 1" />
+        <limit effort="40.0" velocity="1.6599826812744" upper="3.0513999462128" lower="-3.0513999462128" />
+        <parent link="link_2" />
+        <child link="link_3" />
+        <origin xyz="0.000002 -0.124498 0.131502" rpy="-1.570796 3.141593 3.141247" />
+    </joint>
+    <link name="link_3">
+        <inertial>
+            <origin xyz="0.000065 -0.008286 0.162441" rpy="-3.141556 3.141938 0.000037" />
+            <inertia izz="0.0023870962911805" ixy="-4.7225399977702e-07" ixx="0.012990901376544" iyz="-0.00077051317047048" iyy="0.013110323037606" ixz="5.2251373501453e-07" />
+            <mass value="1.0" />
+        </inertial>
+        <collision name="link">
+            <origin xyz="0.000060 -0.000895 0.173917" rpy="-3.141556 3.141938 0.000037" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link_3_coll_1.dae" />
+            </geometry>
+        </collision>
+        <collision name="link">
+            <origin xyz="0.000060 -0.000895 0.173917" rpy="-3.141556 3.141938 0.000037" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link_3_coll_2.dae" />
+            </geometry>
+        </collision>
+        <visual name="link3_visible">
+            <origin xyz="0.000060 -0.000895 0.173917" rpy="-3.141556 3.141938 0.000037" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link3_visible_vis_1.dae" />
+            </geometry>
+            <material name="link3_visible_material">
+                <color rgba="0.704000 0.228000 0.237000 1.0" />
+            </material>
+        </visual>
+        <visual name="link3_visible">
+            <origin xyz="0.000060 -0.000895 0.173917" rpy="-3.141556 3.141938 0.000037" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link3_visible_vis_2.dae" />
+            </geometry>
+            <material name="link3_visible_material">
+                <color rgba="1.000000 1.000000 1.000000 1.0" />
+            </material>
+        </visual>
+        <visual name="link3_visible">
+            <origin xyz="0.000060 -0.000895 0.173917" rpy="-3.141556 3.141938 0.000037" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link3_visible_vis_3.dae" />
+            </geometry>
+            <material name="link3_visible_material">
+                <color rgba="0.170000 0.170000 0.170000 1.0" />
+            </material>
+        </visual>
+    </link>
+    <joint name="right_j9" type="revolute">
+        <axis xyz="0 0 1" />
+        <limit effort="40.0" velocity="1.6599826812744" upper="3.0513999462128" lower="-3.0513999462128" />
+        <parent link="link_3" />
+        <child link="link_4" />
+        <origin xyz="0.000095 -0.047483 0.275502" rpy="1.570796 3.141247 3.141593" />
+    </joint>
+    <link name="link_4">
+        <inertial>
+            <origin xyz="0.000035 -0.031094 -0.088026" rpy="1.570833 3.141556 -0.000000" />
+            <inertia izz="0.00229509144725" ixy="1.4998583093537e-07" ixx="0.0036690464382221" iyz="-0.00048279537178467" iyy="0.0027132799496664" ixz="-3.8473090978777e-07" />
+            <mass value="1.0" />
+        </inertial>
+        <collision name="link">
+            <origin xyz="-0.000261 -0.034072 -0.087668" rpy="1.570833 3.141556 -0.000000" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link_4_coll_1.dae" />
+            </geometry>
+        </collision>
+        <collision name="link">
+            <origin xyz="-0.000261 -0.034072 -0.087668" rpy="1.570833 3.141556 -0.000000" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link_4_coll_2.dae" />
+            </geometry>
+        </collision>
+        <collision name="link">
+            <origin xyz="-0.000261 -0.034072 -0.087668" rpy="1.570833 3.141556 -0.000000" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link_4_coll_3.dae" />
+            </geometry>
+        </collision>
+        <collision name="link">
+            <origin xyz="-0.000261 -0.034072 -0.087668" rpy="1.570833 3.141556 -0.000000" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link_4_coll_4.dae" />
+            </geometry>
+        </collision>
+        <collision name="link">
+            <origin xyz="-0.000261 -0.034072 -0.087668" rpy="1.570833 3.141556 -0.000000" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link_4_coll_5.dae" />
+            </geometry>
+        </collision>
+        <collision name="link">
+            <origin xyz="-0.000261 -0.034072 -0.087668" rpy="1.570833 3.141556 -0.000000" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link_4_coll_6.dae" />
+            </geometry>
+        </collision>
+        <visual name="link4_visible">
+            <origin xyz="-0.000097 -0.034073 -0.087705" rpy="1.570833 3.141556 -0.000000" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link4_visible_vis_1.dae" />
+            </geometry>
+            <material name="link4_visible_material">
+                <color rgba="0.170000 0.170000 0.170000 1.0" />
+            </material>
+        </visual>
+        <visual name="link4_visible">
+            <origin xyz="-0.000097 -0.034073 -0.087705" rpy="1.570833 3.141556 -0.000000" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link4_visible_vis_2.dae" />
+            </geometry>
+            <material name="link4_visible_material">
+                <color rgba="1.000000 1.000000 1.000000 1.0" />
+            </material>
+        </visual>
+        <visual name="link4_visible">
+            <origin xyz="-0.000097 -0.034073 -0.087705" rpy="1.570833 3.141556 -0.000000" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link4_visible_vis_3.dae" />
+            </geometry>
+            <material name="link4_visible_material">
+                <color rgba="0.704000 0.228000 0.237000 1.0" />
+            </material>
+        </visual>
+    </link>
+    <joint name="right_j10" type="revolute">
+        <axis xyz="0 0 1" />
+        <limit effort="9.0" velocity="2.9670596122742" upper="2.9842000007629" lower="-2.9842000007629" />
+        <parent link="link_4" />
+        <child link="link_5" />
+        <origin xyz="-0.000002 -0.113058 -0.120993" rpy="-1.570796 3.141593 3.141247" />
+    </joint>
+    <link name="link_5">
+        <inertial>
+            <origin xyz="0.000015 0.004112 0.157382" rpy="3.141555 3.141247 -3.141555" />
+            <inertia izz="0.0014883400569851" ixy="1.0762864560708e-06" ixx="0.011532277840145" iyz="-0.0004295587066749" iyy="0.011640130102973" ixz="-6.9965491113914e-07" />
+            <mass value="1.0" />
+        </inertial>
+        <collision name="link">
+            <origin xyz="-0.000332 0.000074 0.172882" rpy="3.141555 3.141247 -3.141555" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link_5_coll_1.dae" />
+            </geometry>
+        </collision>
+        <collision name="link">
+            <origin xyz="-0.000332 0.000074 0.172882" rpy="3.141555 3.141247 -3.141555" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link_5_coll_2.dae" />
+            </geometry>
+        </collision>
+        <collision name="link">
+            <origin xyz="-0.000332 0.000074 0.172882" rpy="3.141555 3.141247 -3.141555" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link_5_coll_3.dae" />
+            </geometry>
+        </collision>
+        <collision name="link">
+            <origin xyz="-0.000332 0.000074 0.172882" rpy="3.141555 3.141247 -3.141555" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link_5_coll_4.dae" />
+            </geometry>
+        </collision>
+        <collision name="link">
+            <origin xyz="-0.000332 0.000074 0.172882" rpy="3.141555 3.141247 -3.141555" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link_5_coll_5.dae" />
+            </geometry>
+        </collision>
+        <visual name="link5_visible">
+            <origin xyz="-0.001841 0.000074 0.172883" rpy="3.141555 3.141247 -3.141555" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link5_visible_vis_1.dae" />
+            </geometry>
+            <material name="link5_visible_material">
+                <color rgba="0.704000 0.228000 0.237000 1.0" />
+            </material>
+        </visual>
+        <visual name="link5_visible">
+            <origin xyz="-0.001841 0.000074 0.172883" rpy="3.141555 3.141247 -3.141555" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link5_visible_vis_2.dae" />
+            </geometry>
+            <material name="link5_visible_material">
+                <color rgba="0.130000 0.130000 0.130000 1.0" />
+            </material>
+        </visual>
+        <visual name="link5_visible">
+            <origin xyz="-0.001841 0.000074 0.172883" rpy="3.141555 3.141247 -3.141555" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link5_visible_vis_3.dae" />
+            </geometry>
+            <material name="link5_visible_material">
+                <color rgba="0.440000 0.440000 0.440000 1.0" />
+            </material>
+        </visual>
+        <visual name="link5_visible">
+            <origin xyz="-0.001841 0.000074 0.172883" rpy="3.141555 3.141247 -3.141555" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link5_visible_vis_4.dae" />
+            </geometry>
+            <material name="link5_visible_material">
+                <color rgba="0.750000 0.750000 0.750000 1.0" />
+            </material>
+        </visual>
+        <visual name="link5_visible">
+            <origin xyz="-0.001841 0.000074 0.172883" rpy="3.141555 3.141247 -3.141555" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link5_visible_vis_5.dae" />
+            </geometry>
+            <material name="link5_visible_material">
+                <color rgba="0.170000 0.170000 0.170000 1.0" />
+            </material>
+        </visual>
+        <visual name="link5_visible">
+            <origin xyz="-0.001841 0.000074 0.172883" rpy="3.141555 3.141247 -3.141555" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link5_visible_vis_6.dae" />
+            </geometry>
+            <material name="link5_visible_material">
+                <color rgba="0.170000 0.170000 0.170000 1.0" />
+            </material>
+        </visual>
+    </link>
+    <joint name="right_j11" type="revolute">
+        <axis xyz="0 0 1" />
+        <limit effort="9.0" velocity="2.9670596122742" upper="2.9842000007629" lower="-2.9842000007629" />
+        <parent link="link_5" />
+        <child link="link_6" />
+        <origin xyz="0.000100 0.040504 0.286949" rpy="1.570796 3.141247 3.141593" />
+    </joint>
+    <link name="link_6">
+        <inertial>
+            <origin xyz="0.001044 -0.014412 0.067281" rpy="-1.570834 3.141630 -3.141593" />
+            <inertia izz="0.0022289437559629" ixy="-1.2910797250453e-05" ixx="0.0027213624456158" iyz="-0.00023035421183287" iyy="0.0016572881401433" ixz="2.7258353273844e-06" />
+            <mass value="1.0" />
+        </inertial>
+        <collision name="link">
+            <origin xyz="0.001739 -0.013488 0.066376" rpy="-1.570834 3.141630 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link_6_coll_1.dae" />
+            </geometry>
+        </collision>
+        <collision name="link">
+            <origin xyz="0.001739 -0.013488 0.066376" rpy="-1.570834 3.141630 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link_6_coll_2.dae" />
+            </geometry>
+        </collision>
+        <collision name="link">
+            <origin xyz="0.001739 -0.013488 0.066376" rpy="-1.570834 3.141630 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link_6_coll_3.dae" />
+            </geometry>
+        </collision>
+        <collision name="link">
+            <origin xyz="0.001739 -0.013488 0.066376" rpy="-1.570834 3.141630 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link_6_coll_4.dae" />
+            </geometry>
+        </collision>
+        <collision name="link">
+            <origin xyz="0.001739 -0.013488 0.066376" rpy="-1.570834 3.141630 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link_6_coll_5.dae" />
+            </geometry>
+        </collision>
+        <collision name="link">
+            <origin xyz="0.001739 -0.013488 0.066376" rpy="-1.570834 3.141630 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link_6_coll_6.dae" />
+            </geometry>
+        </collision>
+        <collision name="link">
+            <origin xyz="0.001739 -0.013488 0.066376" rpy="-1.570834 3.141630 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link_6_coll_7.dae" />
+            </geometry>
+        </collision>
+        <collision name="link">
+            <origin xyz="0.001739 -0.013488 0.066376" rpy="-1.570834 3.141630 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link_6_coll_8.dae" />
+            </geometry>
+        </collision>
+        <visual name="link6_visible">
+            <origin xyz="0.001740 -0.013488 0.066377" rpy="-1.570834 3.141630 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link6_visible_vis_1.dae" />
+            </geometry>
+            <material name="link6_visible_material">
+                <color rgba="0.704000 0.228000 0.237000 1.0" />
+            </material>
+        </visual>
+        <visual name="link6_visible">
+            <origin xyz="0.001740 -0.013488 0.066377" rpy="-1.570834 3.141630 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link6_visible_vis_2.dae" />
+            </geometry>
+            <material name="link6_visible_material">
+                <color rgba="0.170000 0.170000 0.170000 1.0" />
+            </material>
+        </visual>
+    </link>
+    <joint name="right_j12" type="revolute">
+        <axis xyz="0 0 1" />
+        <limit effort="9.0" velocity="3.857177734375" upper="4.7104001045227" lower="-4.7104001045227" />
+        <parent link="link_6" />
+        <child link="link_7" />
+        <origin xyz="0.000001 -0.073999 0.095801" rpy="-1.570834 3.141630 -3.141593" />
+    </joint>
+    <link name="link_7">
+        <inertial>
+            <origin xyz="-0.010875 -0.000101 0.037307" rpy="-3.141593 3.141593 -3.141593" />
+            <inertia izz="0.00097693969707942" ixy="-2.4535727950775e-06" ixx="0.00070220548505024" iyz="-1.4691118720596e-07" iyy="0.0009677705191668" ixz="-3.7474537605587e-05" />
+            <mass value="1.0" />
+        </inertial>
+        <collision name="link">
+            <origin xyz="-0.013161 -0.000000 0.039173" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link_7_coll_1.dae" />
+            </geometry>
+        </collision>
+        <collision name="link">
+            <origin xyz="-0.013161 -0.000000 0.039173" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link_7_coll_2.dae" />
+            </geometry>
+        </collision>
+        <visual name="link7_visible">
+            <origin xyz="-0.013161 0.000000 0.039172" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link7_visible_vis_1.dae" />
+            </geometry>
+            <material name="link7_visible_material">
+                <color rgba="0.170000 0.170000 0.170000 1.0" />
+            </material>
+        </visual>
+        <visual name="link7_visible">
+            <origin xyz="-0.013161 0.000000 0.039172" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link7_visible_vis_2.dae" />
+            </geometry>
+            <material name="link7_visible_material">
+                <color rgba="1.000000 1.000000 1.000000 1.0" />
+            </material>
+        </visual>
+        <visual name="link7_visible">
+            <origin xyz="-0.013161 0.000000 0.039172" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_link7_visible_vis_3.dae" />
+            </geometry>
+            <material name="link7_visible_material">
+                <color rgba="0.030000 0.030000 0.030000 1.0" />
+            </material>
+        </visual>
+    </link>
+    <joint name="wrist_connector" type="fixed">
+        <axis xyz="0 0 1" />
+        <parent link="link_7" />
+        <child link="BaxterGripper" />
+        <origin xyz="-0.000014 -0.000018 0.074397" rpy="3.141586 3.141604 -1.570715" />
+    </joint>
+    <link name="BaxterGripper">
+        <inertial>
+            <origin xyz="-0.000121 0.003290 0.023832" rpy="-3.141593 3.141593 -3.141593" />
+            <inertia izz="0.00079323016784013" ixy="-5.5939809004219e-07" ixx="0.00031323339750546" iyz="1.790728876077e-05" iyy="0.00077332012979249" ixz="2.74050345727e-07" />
+            <mass value="0.5" />
+        </inertial>
+        <collision name="BaxterGripper">
+            <origin xyz="0.000001 0.007617 0.025957" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_BaxterGripper_coll_1.dae" />
+            </geometry>
+        </collision>
+        <collision name="BaxterGripper">
+            <origin xyz="0.000001 0.007617 0.025957" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_BaxterGripper_coll_2.dae" />
+            </geometry>
+        </collision>
+        <collision name="BaxterGripper">
+            <origin xyz="0.000001 0.007617 0.025957" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_BaxterGripper_coll_3.dae" />
+            </geometry>
+        </collision>
+        <collision name="BaxterGripper">
+            <origin xyz="0.000001 0.007617 0.025957" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_BaxterGripper_coll_4.dae" />
+            </geometry>
+        </collision>
+        <visual name="visible">
+            <origin xyz="-0.000000 0.005198 0.024263" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_visible_vis_1.dae" />
+            </geometry>
+            <material name="visible_material">
+                <color rgba="0.670588 0.211765 0.211765 1.0" />
+            </material>
+        </visual>
+        <visual name="visible">
+            <origin xyz="-0.000000 0.005198 0.024263" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_visible_vis_2.dae" />
+            </geometry>
+            <material name="visible_material">
+                <color rgba="0.811765 0.811765 0.811765 1.0" />
+            </material>
+        </visual>
+        <visual name="visible">
+            <origin xyz="-0.000000 0.005198 0.024263" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_visible_vis_3.dae" />
+            </geometry>
+            <material name="visible_material">
+                <color rgba="0.323529 0.323529 0.323529 1.0" />
+            </material>
+        </visual>
+        <visual name="visible">
+            <origin xyz="-0.000000 0.005198 0.024263" rpy="-3.141593 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_visible_vis_4.dae" />
+            </geometry>
+            <material name="visible_material">
+                <color rgba="0.811765 0.811765 0.811765 1.0" />
+            </material>
+        </visual>
+    </link>
+    <joint name="centerJoint" type="prismatic">
+        <axis xyz="0 0 1" />
+        <limit effort="50.0" velocity="10.0" upper="0.5" lower="-0.5" />
+        <parent link="BaxterGripper" />
+        <child link="rightFinger" />
+        <origin xyz="-0.000000 0.000000 0.103000" rpy="1.570797 3.141593 -1.570796" />
+    </joint>
+    <link name="rightFinger">
+        <inertial>
+            <origin xyz="-0.002264 0.023816 0.017830" rpy="-1.570796 3.141593 3.141593" />
+            <inertia izz="0.00010710570274805" ixy="-1.1895637718842e-05" ixx="0.00047113805017029" iyz="-0.00010388536038355" iyy="0.00038696678780815" ixz="-3.6416775627243e-05" />
+            <mass value="0.15000000596046" />
+        </inertial>
+        <collision name="rightFinger">
+            <origin xyz="0.000005 -0.000020 0.021779" rpy="-1.570644 1.571450 1.570949" />
+            <geometry>
+                <box size="0.007413 0.036002 0.016687" />
+            </geometry>
+        </collision>
+        <collision name="rightFinger">
+            <origin xyz="-0.005375 0.051728 0.001395" rpy="3.141593 3.141593 1.570796" />
+            <geometry>
+                <box size="0.011786 0.009750 0.039693" />
+            </geometry>
+        </collision>
+        <collision name="rightFinger">
+            <origin xyz="-0.005375 0.047877 0.026539" rpy="1.570864 3.141592 0.000000" />
+            <geometry>
+                <box size="0.009750 0.010597 0.019489" />
+            </geometry>
+        </collision>
+        <collision name="rightFinger">
+            <origin xyz="-0.000001 0.008598 0.026539" rpy="-1.570655 3.141593 3.141592" />
+            <geometry>
+                <box size="0.009195 0.010602 0.046930" />
+            </geometry>
+        </collision>
+        <visual name="rightFinger_visible">
+            <origin xyz="-0.002827 0.021378 0.006693" rpy="-1.570786 3.141593 -0.000000" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_rightFinger_visible_vis_1.dae" />
+            </geometry>
+            <material name="rightFinger_visible_material">
+                <color rgba="0.811765 0.811765 0.811765 1.0" />
+            </material>
+        </visual>
+    </link>
+    <joint name="rightFingerPad_connection" type="fixed">
+        <axis xyz="0 0 1" />
+        <parent link="rightFinger" />
+        <child link="righPad" />
+        <origin xyz="0.000005 -0.000020 0.019279" rpy="-0.000000 3.141592 -1.570796" />
+    </joint>
+    <link name="righPad">
+        <inertial>
+            <origin xyz="0.000000 0.000000 0.000000" rpy="1.570979 4.711736 -0.000183" />
+            <inertia izz="0.0001700699098658" ixy="0.0" ixx="0.0003802325994949" iyz="0.0" iyy="0.00021377499935663" ixz="0.0" />
+            <mass value="0.15000000596046" />
+        </inertial>
+        <collision name="righPad">
+            <origin xyz="0.000000 0.000000 0.000000" rpy="1.570979 4.711736 -0.000183" />
+            <geometry>
+                <box size="0.003731 0.036002 0.040408" />
+            </geometry>
+        </collision>
+        <visual name="rightPad_visible">
+            <origin xyz="0.000001 -0.000000 -0.002170" rpy="1.571009 4.711736 -0.000213" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_rightPad_visible_vis_1.dae" />
+            </geometry>
+            <material name="rightPad_visible_material">
+                <color rgba="1.000000 1.000000 1.000000 1.0" />
+            </material>
+        </visual>
+    </link>
+    <joint name="closeJoint" type="prismatic">
+        <axis xyz="0 0 1" />
+        <limit effort="20.0" velocity="10.0" upper="0.0462" lower="0.0" />
+        <parent link="rightFinger" />
+        <child link="leftFinger" />
+        <origin xyz="-0.000000 0.000000 -0.000000" rpy="3.141593 3.141593 3.141593" />
+    </joint>
+    <link name="leftFinger">
+        <inertial>
+            <origin xyz="0.002264 0.023816 -0.017830" rpy="1.570796 3.141592 0.000000" />
+            <inertia izz="0.00010710570274805" ixy="-1.1895637718842e-05" ixx="0.00047113805017029" iyz="-0.00010388536038355" iyy="0.00038696678780815" ixz="-3.6416775627243e-05" />
+            <mass value="0.15000000596046" />
+        </inertial>
+        <collision name="leftFinger">
+            <origin xyz="-0.000005 -0.000020 -0.021779" rpy="1.571723 4.711736 1.569870" />
+            <geometry>
+                <box size="0.007413 0.036002 0.016687" />
+            </geometry>
+        </collision>
+        <collision name="leftFinger">
+            <origin xyz="0.005375 0.051728 -0.001395" rpy="0.000000 3.141593 1.570796" />
+            <geometry>
+                <box size="0.011786 0.009750 0.039693" />
+            </geometry>
+        </collision>
+        <collision name="leftFinger">
+            <origin xyz="0.005375 0.047877 -0.026539" rpy="-1.570729 3.141594 3.141592" />
+            <geometry>
+                <box size="0.009750 0.010597 0.019489" />
+            </geometry>
+        </collision>
+        <collision name="leftFinger">
+            <origin xyz="0.000001 0.008598 -0.026539" rpy="1.570938 3.141591 0.000001" />
+            <geometry>
+                <box size="0.009195 0.010602 0.046930" />
+            </geometry>
+        </collision>
+        <visual name="leftFinger_visible">
+            <origin xyz="0.002827 0.021378 -0.006693" rpy="1.570807 3.141593 -3.141593" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_leftFinger_visible_vis_1.dae" />
+            </geometry>
+            <material name="leftFinger_visible_material">
+                <color rgba="0.811765 0.811765 0.811765 1.0" />
+            </material>
+        </visual>
+    </link>
+    <joint name="leftFingerPad_connection" type="fixed">
+        <axis xyz="0 0 1" />
+        <parent link="leftFinger" />
+        <child link="leftPad" />
+        <origin xyz="-0.000005 -0.000020 -0.019279" rpy="-3.141592 3.141593 1.570796" />
+    </joint>
+    <link name="leftPad">
+        <inertial>
+            <origin xyz="0.000000 0.000000 0.000000" rpy="1.571480 4.711735 3.140909" />
+            <inertia izz="0.0001700699098658" ixy="0.0" ixx="0.0003802325994949" iyz="0.0" iyy="0.00021377499935663" ixz="0.0" />
+            <mass value="0.15000000596046" />
+        </inertial>
+        <collision name="leftPad">
+            <origin xyz="0.000000 0.000000 0.000000" rpy="1.571480 4.711735 3.140909" />
+            <geometry>
+                <box size="0.003731 0.036002 0.040408" />
+            </geometry>
+        </collision>
+        <visual name="leftPad_visible">
+            <origin xyz="-0.000001 0.000000 -0.002170" rpy="1.571466 4.711735 3.140923" />
+            <geometry>
+                <mesh filename="file://C:/Program Files/CoppeliaRobotics/CoppeliaSimEdu/cadFiles/Sawyer_leftPad_visible_vis_1.dae" />
+            </geometry>
+            <material name="leftPad_visible_material">
+                <color rgba="1.000000 1.000000 1.000000 1.0" />
+            </material>
+        </visual>
+    </link>
+</robot>
