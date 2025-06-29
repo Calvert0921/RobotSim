@@ -15,7 +15,8 @@ class PickCubeMultiCamEnv(PickCubeEnv):
 
         # 1) Top-down camera, looking straight down at the table center
         top_pose = sapien_utils.look_at(
-            eye=[0.0, 0.0, 2.0],        # 2m above the origin
+            eye=[0.0, 0.0, 1.5],        # 2m above the origin
+            up= [1.0, 0.0, 0.0],        # ← use world +Y as the ‘up’ direction
             target=[0.0, 0.0, 0.1]      # looking at the cube area
         )
         configs.append(
@@ -30,7 +31,7 @@ class PickCubeMultiCamEnv(PickCubeEnv):
 
         # 2) Side camera, a static view from the +X direction
         side_pose = sapien_utils.look_at(
-            eye=[2.0, 0.0, 0.5],        # off to the robot’s right
+            eye=[0.0, 1.0, 0.5],        # off to the robot’s right
             target=[0.0, 0.0, 0.1]
         )
         configs.append(
