@@ -65,7 +65,7 @@ class PickCubeMultiCamEnv(PickCubeEnv):
         ee_link = next(l for l in self.agent.robot.get_links()
                if l.name == "panda_hand_tcp")
 
-        # 2) build a local mount‐frame pose:
+        # build a local mount‐frame pose:
         #    - move 5 cm forward along the hand’s +X
         #    - tilt down 30° about the hand’s +Y so "forward" points into the scene
         translation = [0.05, 0.0, 0.0]  
@@ -76,7 +76,7 @@ class PickCubeMultiCamEnv(PickCubeEnv):
 
         wrist_cam_pose = Pose.create_from_pq(p=translation, q=quat)
 
-        # 3) append the camera config
+        # append the camera config
         configs.append(
             CameraConfig(
                 uid="wrist_camera",
