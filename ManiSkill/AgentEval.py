@@ -26,14 +26,16 @@ from pathlib import Path
 import os
 
 import gymnasium as gym
-from gymnasium.wrappers import TimeLimit
 import mani_skill.envs
 import imageio
-import numpy
+import numpy as np
 import torch
+from scipy.spatial.transform import Rotation as R
 from lerobot.common.policies.smolvla.modeling_smolvla import SmolVLAPolicy
 from lerobot.common.datasets.lerobot_dataset import LeRobotDataset
+from lerobot.common.constants import OBS_STATE
 from CamHandler import PickCubeMultiCamEnv
+from utils import *
 
 # Create a directory to store the video of the evaluation
 output_directory = Path("./videos")
@@ -51,91 +53,127 @@ policy = SmolVLAPolicy.from_pretrained(pretrained_policy_path, dataset_stats=dat
 # Initialize evaluation environment to render two observation types:
 # an image of the scene and state/position of the agent. The environment
 # also automatically stops running after 300 interactions/steps.
-        
-# env = gym.make(
-#     "PickCube-v1",
-#     num_envs=1,
-#     obs_mode="state_dict+rgb_dict",           # ← return images as a dict keyed by camera name
-#     control_mode="pd_ee_delta_pose",
-#     camera_names=["top", "wrist", "side"],    # ← add your three views here
-#     camera_resolution=(256, 256),             # ← resolution for each camera
-#     max_episode_steps=300,
-#     render_mode="rgb_array"
-# )
 
 env = gym.make(
     "PickCubeMultiCam-v1",
     num_envs=1,
     obs_mode="state_dict+rgb",       # ← gives you a dict of images
     control_mode="pd_ee_delta_pose",
-    render_mode="rgb_array"
+    render_mode="rgb_array",
+    max_episode_steps=500
 )
 
 # We can verify that the shapes of the features expected by the policy match the ones from the observations
 # produced by the environment
-print(f"Normalization mapping: {policy.config.normalization_mapping}")
-print(policy.config.input_features)
-print(env.observation_space)
+# print(f"Normalization mapping: {policy.config.normalization_mapping}")
+# print(policy.config.input_features)
+# print(env.observation_space)
 
 # Similarly, we can check that the actions produced by the policy will match the actions expected by the
 # environment
-print(policy.config.output_features)
-print(env.action_space)
+# print(policy.config.output_features)
+# print(env.action_space)
 
 # Reset the policy and environments to prepare for rollout
 policy.reset()
-numpy_observation, info = env.reset(seed=42)
-print(f"Observation: {numpy_observation}")
+raw_observation, info = env.reset(seed=42)
+# print(f"Observation: {raw_observation}")
 
 # Prepare to collect every rewards and all the frames of the episode,
 # from initial state to final state.
 rewards = []
 frames = []
 
-# Render frame of the initial state
-frames.append(env.render())
+# Create output directory for videos
+output_dir = Path("./videos")
+output_dir.mkdir(parents=True, exist_ok=True)
+
+# Prepare imageio writers for each camera
+fps = env.metadata.get("render_fps", 30)
+writers = {}
+camera_uids = list(raw_observation["sensor_data"].keys())
+for uid in camera_uids:
+    video_path = output_dir / f"{uid}.mp4"
+    writers[uid] = imageio.get_writer(str(video_path), fps=fps)
+    print(f"Opened writer for {uid}: {video_path}")
+
 
 step = 0
 done = False
 while not done:
     # Prepare observation for the policy running in Pytorch
-    state = torch.from_numpy(numpy_observation["agent_pos"])
-    image = torch.from_numpy(numpy_observation["pixels"])
+    raw_pose = raw_observation["extra"]["tcp_pose"].numpy()
+    state6 = convert_7_to_6(raw_pose)
+    
+    # to torch, float32, add batch dim → (1,6)
+    state = torch.from_numpy(state6).to(torch.float32).unsqueeze(0)
+    print(f"{step=} {raw_pose=}")
+    
+    top_image = raw_observation["sensor_data"]["top_camera"]["rgb"]      # Shape: [1, 256, 256, 3]
+    side_image = raw_observation["sensor_data"]["side_camera"]["rgb"]
+    wrist_image = raw_observation["sensor_data"]["wrist_camera"]["rgb"]
 
     # Convert to float32 with image from channel first in [0,255]
     # to channel last in [0,1]
     state = state.to(torch.float32)
-    image = image.to(torch.float32) / 255
-    image = image.permute(2, 0, 1)
+    top_image = (top_image.to(torch.float32)
+                 .permute(0, 3, 1, 2)
+                 /255.0
+                 )
+    side_image = (side_image.to(torch.float32)
+                 .permute(0, 3, 1, 2) 
+                 /255.0
+                 )
+    wrist_image = (wrist_image.to(torch.float32)
+                 .permute(0, 3, 1, 2) 
+                 /255.0
+                 )
 
     # Send data tensors from CPU to GPU
     state = state.to(device, non_blocking=True)
-    image = image.to(device, non_blocking=True)
+    top_image = top_image.to(device, non_blocking=True)
+    side_image = side_image.to(device, non_blocking=True)
+    wrist_image = wrist_image.to(device, non_blocking=True)
 
     # Add extra (empty) batch dimension, required to forward the policy
-    state = state.unsqueeze(0)
-    image = image.unsqueeze(0)
+    # state = state.unsqueeze(0)
+    # top_image = top_image.unsqueeze(0)
+    # side_image = side_image.unsqueeze(0)
+    # wrist_image = wrist_image.unsqueeze(0)
 
     # Create the policy input dictionary
-    observation = {
-        "observation.state": state,
-        "observation.image": image,
+    batch = {
+        OBS_STATE: state,
+        "observation.image2": top_image,
+        "observation.image": wrist_image,
+        "observation.image3": side_image,
+        "task": "Pick up the red cube."
     }
 
     # Predict the next action with respect to the current observation
     with torch.inference_mode():
-        action = policy.select_action(observation)
-
+        action = policy.select_action(batch)
+        action[:, :3] *= 0.05    # 5 cm per norm-unit
+        action[:, 3:6] *= 0.2     # ~11° per norm-unit
+        
+        # Convert to 7-dimension action for env
+        action = convert_6_to_7(action)
+        
     # Prepare the action for the environment
-    numpy_action = action.squeeze(0).to("cpu").numpy()
+    # action = action.squeeze(0).astype(np.float32)
+    print(f"{step=} {action=}")
 
     # Step through the environment and receive a new observation
-    numpy_observation, reward, terminated, truncated, info = env.step(numpy_action)
+    raw_observation, reward, terminated, truncated, info = env.step(action)
     print(f"{step=} {reward=} {terminated=}")
 
     # Keep track of all the rewards and frames
     rewards.append(reward)
-    frames.append(env.render())
+    # Append each camera frame to its writer
+    for uid, data in raw_observation["sensor_data"].items():
+        rgba = data["rgb"]           # tensor [1,H,W,4]
+        rgb = rgba[0, ..., :3].cpu().numpy().astype(np.uint8)
+        writers[uid].append_data(rgb)
 
     # The rollout is considered done when the success state is reached (i.e. terminated is True),
     # or the maximum number of iterations is reached (i.e. truncated is True)
@@ -147,11 +185,7 @@ if terminated:
 else:
     print("Failure!")
 
-# Get the speed of environment (i.e. its number of frames per second).
-fps = env.metadata["render_fps"]
-
-# Encode all frames into a mp4 video.
-video_path = output_directory / "rollout.mp4"
-imageio.mimsave(str(video_path), numpy.stack(frames), fps=fps)
-
-print(f"Video of the evaluation is available in '{video_path}'.")
+# Close all writers
+for uid, writer in writers.items():
+    writer.close()
+    print(f"Saved video for camera '{uid}' at: {output_dir/ (uid + '.mp4')}" )
