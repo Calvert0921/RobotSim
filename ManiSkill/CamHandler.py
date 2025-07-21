@@ -62,6 +62,7 @@ class PickCubeMultiCamEnv(PickCubeEnv):
 
         # 3) Wrist-mounted camera, parented to the end-effector link
         #    Here we grab the last link of the robot; adjust if your link names differ.
+        print(f"Joints: {self.agent.robot.active_joints.get_name()}")
         ee_link = next(l for l in self.agent.robot.get_links()
                if l.name == "panda_hand_tcp")
 

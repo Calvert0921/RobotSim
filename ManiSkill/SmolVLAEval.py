@@ -37,10 +37,6 @@ from lerobot.common.constants import OBS_STATE
 from CamHandler import PickCubeMultiCamEnv
 from utils import *
 
-# Create a directory to store the video of the evaluation
-output_directory = Path("./videos")
-output_directory.mkdir(parents=True, exist_ok=True)
-
 # Select your device
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 device = "cuda"
@@ -57,7 +53,7 @@ policy = SmolVLAPolicy.from_pretrained(pretrained_policy_path, dataset_stats=dat
 env = gym.make(
     "PickCubeMultiCam-v1",
     num_envs=1,
-    obs_mode="state_dict+rgb",       # ← gives you a dict of images
+    obs_mode="state_dict+rgb", 
     control_mode="pd_ee_delta_pose",
     render_mode="rgb_array",
     max_episode_steps=500
@@ -71,8 +67,8 @@ env = gym.make(
 
 # Similarly, we can check that the actions produced by the policy will match the actions expected by the
 # environment
-# print(policy.config.output_features)
-# print(env.action_space)
+print(policy.config.output_features)
+print(env.action_space)
 
 # Reset the policy and environments to prepare for rollout
 policy.reset()
@@ -85,7 +81,7 @@ rewards = []
 frames = []
 
 # Create output directory for videos
-output_dir = Path("./videos")
+output_dir = Path("./videos_smolvla")
 output_dir.mkdir(parents=True, exist_ok=True)
 
 # Prepare imageio writers for each camera
@@ -144,8 +140,8 @@ while not done:
     # Create the policy input dictionary
     batch = {
         OBS_STATE: state,
-        "observation.image2": top_image,
-        "observation.image": wrist_image,
+        "observation.image": top_image,
+        "observation.image2": wrist_image,
         "observation.image3": side_image,
         "task": "Pick up the red cube."
     }
