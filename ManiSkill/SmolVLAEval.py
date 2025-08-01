@@ -34,30 +34,61 @@ from scipy.spatial.transform import Rotation as R
 from lerobot.common.policies.smolvla.modeling_smolvla import SmolVLAPolicy
 from lerobot.common.datasets.lerobot_dataset import LeRobotDataset
 from lerobot.common.constants import OBS_STATE
-from CamHandler import PickCubeMultiCamEnv
-from utils import *
+from CamHandler import *
+
+# Select task
+tasks = ["pickcube", "peginsertion", "pickmulticube"]
+task = tasks[2]
 
 # Select your device
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 device = "cuda"
 
 # Load Policy
-pretrained_policy_path = "lerobot/smolvla_base"
-dataset = LeRobotDataset("lerobot/svla_so101_pickplace", download_videos=False)
+if task == "pickcube":
+    pretrained_policy_path = "Calvert0921/smolvla_franka_liftcube_200"
+    dataset = LeRobotDataset("Calvert0921/SmolVLA_LiftCube_Franka", download_videos=False)
+elif task == "peginsertion":
+    pretrained_policy_path = "Calvert0921/smolvla_franka_peginsertion_200"
+    dataset = LeRobotDataset("Calvert0921/SmolVLA_PegInsertion_Franka", download_videos=False)
+else:
+    pretrained_policy_path = "Calvert0921/smolvla_franka_liftcubes"
+    dataset = LeRobotDataset("Calvert0921/SmolVLA_LiftCube_Franka_2000", download_videos=False)
 policy = SmolVLAPolicy.from_pretrained(pretrained_policy_path, dataset_stats=dataset.meta.stats)
 
 # Initialize evaluation environment to render two observation types:
 # an image of the scene and state/position of the agent. The environment
 # also automatically stops running after 300 interactions/steps.
-
-env = gym.make(
-    "PickCubeMultiCam-v1",
-    num_envs=1,
-    obs_mode="state_dict+rgb", 
-    control_mode="pd_ee_delta_pose",
-    render_mode="rgb_array",
-    max_episode_steps=500
-)
+if task == "pickcube":
+    env = gym.make(
+        "PickCubeMultiCam-v1",
+        robot_uids="panda_wristcam",
+        num_envs=1,
+        obs_mode="state_dict+rgb", 
+        control_mode="pd_joint_pos",
+        render_mode="rgb_array",
+        max_episode_steps=200,
+    )
+elif task == "peginsertion":
+    env = gym.make(
+        "PegInsertionSideMultiCam-v1",
+        robot_uids="panda_wristcam",
+        num_envs=1,
+        obs_mode="state_dict+rgb", 
+        control_mode="pd_joint_pos",
+        render_mode="rgb_array",
+        max_episode_steps=1000,
+    )
+else:
+    env = gym.make(
+        "PickMultiCubeMultiCam-v1",
+        robot_uids="panda_wristcam",
+        num_envs=1,
+        obs_mode="state_dict+rgb", 
+        control_mode="pd_joint_pos",
+        render_mode="rgb_array",
+        max_episode_steps=200,
+    )
 
 # We can verify that the shapes of the features expected by the policy match the ones from the observations
 # produced by the environment
@@ -67,12 +98,12 @@ env = gym.make(
 
 # Similarly, we can check that the actions produced by the policy will match the actions expected by the
 # environment
-print(policy.config.output_features)
-print(env.action_space)
+# print(policy.config.output_features)
+# print(env.action_space)
 
 # Reset the policy and environments to prepare for rollout
 policy.reset()
-raw_observation, info = env.reset(seed=42)
+raw_observation, info = env.reset()
 # print(f"Observation: {raw_observation}")
 
 # Prepare to collect every rewards and all the frames of the episode,
@@ -98,20 +129,21 @@ step = 0
 done = False
 while not done:
     # Prepare observation for the policy running in Pytorch
-    raw_pose = raw_observation["extra"]["tcp_pose"].numpy()
-    state6 = convert_7_to_6(raw_pose)
+    state = raw_observation["agent"]["qpos"].unsqueeze(0)
+    print(f"{step=} {state=}")
     
-    # to torch, float32, add batch dim → (1,6)
-    state = torch.from_numpy(state6).to(torch.float32).unsqueeze(0)
-    print(f"{step=} {raw_pose=}")
-    
-    top_image = raw_observation["sensor_data"]["top_camera"]["rgb"]      # Shape: [1, 256, 256, 3]
+    base_image = raw_observation["sensor_data"]["base_camera"]["rgb"]      # Shape: [1, 256, 256, 3]
+    top_image = raw_observation["sensor_data"]["top_camera"]["rgb"]
     side_image = raw_observation["sensor_data"]["side_camera"]["rgb"]
-    wrist_image = raw_observation["sensor_data"]["wrist_camera"]["rgb"]
+    wrist_image = raw_observation["sensor_data"]["hand_camera"]["rgb"]
 
     # Convert to float32 with image from channel first in [0,255]
     # to channel last in [0,1]
     state = state.to(torch.float32)
+    base_image = (base_image.to(torch.float32)
+                 .permute(0, 3, 1, 2)
+                 /255.0
+                 )
     top_image = (top_image.to(torch.float32)
                  .permute(0, 3, 1, 2)
                  /255.0
@@ -127,6 +159,7 @@ while not done:
 
     # Send data tensors from CPU to GPU
     state = state.to(device, non_blocking=True)
+    base_image = base_image.to(device, non_blocking=True)
     top_image = top_image.to(device, non_blocking=True)
     side_image = side_image.to(device, non_blocking=True)
     wrist_image = wrist_image.to(device, non_blocking=True)
@@ -138,22 +171,31 @@ while not done:
     # wrist_image = wrist_image.unsqueeze(0)
 
     # Create the policy input dictionary
-    batch = {
-        OBS_STATE: state,
-        "observation.image": top_image,
-        "observation.image2": wrist_image,
-        "observation.image3": side_image,
-        "task": "Pick up the red cube."
-    }
+    if task == "pickcube":
+        batch = {
+            OBS_STATE: state,
+            "observation.images.up": top_image,
+            "observation.images.wrist": wrist_image,
+            "task": "pick up the red cube."
+        }
+    elif task == "peginsertion":
+        batch = {
+            OBS_STATE: state,
+            "observation.images.up": top_image,
+            "observation.images.wrist": wrist_image,
+            "task": "insert the peg in the hole."
+        }
+    else:
+        batch = {
+            OBS_STATE: state,
+            "observation.images.up": top_image,
+            "observation.images.wrist": wrist_image,
+            "task": "pick up the blue cube."
+        }
 
     # Predict the next action with respect to the current observation
     with torch.inference_mode():
         action = policy.select_action(batch)
-        action[:, :3] *= 0.05    # 5 cm per norm-unit
-        action[:, 3:6] *= 0.2     # ~11° per norm-unit
-        
-        # Convert to 7-dimension action for env
-        action = convert_6_to_7(action)
         
     # Prepare the action for the environment
     # action = action.squeeze(0).astype(np.float32)
