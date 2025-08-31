@@ -1,27 +1,3 @@
-# Copyright 2024 The HuggingFace Inc. team. All rights reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-"""
-This script demonstrates how to evaluate a pretrained policy from the HuggingFace Hub or from your local
-training outputs directory. In the latter case, you might want to run examples/3_train_policy.py first.
-
-It requires the installation of the 'gym_pusht' simulation environment. Install it by running:
-```bash
-pip install -e ".[pusht]"
-```
-"""
-
 from pathlib import Path
 import os
 import sys
@@ -115,16 +91,17 @@ def eval_once():
         # Keep track of all the rewards and frames
         rewards.append(reward)
         
-        # check the cube's current Z
-        curr_cube_z = core.cube.pose.p[0, 2].item()
-        if curr_cube_z - init_cube_z >= 0.1:
-            print(f"Iteration: {iter+1}, Success: True")
-            return True
-        
         # Append each camera frame to its writer
         rgba = raw_observation["sensor_data"]["base_camera"]["rgb"]
         rgb = rgba[0, ..., :3].cpu().numpy().astype(np.uint8)
         writer.append_data(rgb)
+        
+        # check the cube's current Z
+        curr_cube_z = core.cube.pose.p[0, 2].item()
+        if curr_cube_z - init_cube_z >= 0.1:
+            print(f"Iteration: {iter+1}, Success: True")
+            writer.close()
+            return True
 
         # The rollout is considered done when the success state is reached (i.e. terminated is True),
         # or the maximum number of iterations is reached (i.e. truncated is True)
@@ -135,8 +112,12 @@ def eval_once():
     writer.close()
     
     # Count number of successful round  
-    print(f"Iteration: {iter+1}, Success: False")
-    return False
+    if curr_cube_z - init_cube_z >= 0.04:
+        print(f"Iteration: {iter+1}, Success: True")
+        return True
+    else:
+        print(f"Iteration: {iter+1}, Success: False")
+        return False
 
         
 if __name__ == "__main__":
@@ -148,8 +129,8 @@ if __name__ == "__main__":
     os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
     # Load Policy
-    pretrained_policy_path = "Calvert0921/smolvla_franka_liftcube_1000"
-    dataset = LeRobotDataset("Calvert0921/SmolVLA_LiftCube_Franka_1000", download_videos=False)
+    pretrained_policy_path = "Calvert0921/smolvla_franka_liftcube_500"
+    dataset = LeRobotDataset("Calvert0921/SmolVLA_LiftCube_Franka_500", download_videos=False)
 
     policy = SmolVLAPolicy.from_pretrained(pretrained_policy_path, dataset_stats=dataset.meta.stats)
     
