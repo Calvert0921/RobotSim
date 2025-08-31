@@ -21,7 +21,7 @@ python -m ManiSkill.EvalTasks.LiftCube_5colour
 
 ![example](Tests/1cube_fail.gif)
 
-### Testing in env with five cubes
+### Testing in env with five cubes(lifting the black cube)
 *Successful example*
 
 ![example](Tests/5cube_success.gif)
