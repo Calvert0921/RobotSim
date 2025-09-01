@@ -1,5 +1,5 @@
 # Other scripts
-This folder contains scripts which should be used in other repos: *lerobot* and *maniskill-data-vla*
+This folder contains scripts which should be used in other repos: *maniskill-data-vla* and *lerobot*
 ## lift_cubes.py
 Env creater, contains five cubes with different colours
 ## convert_to_lerobot.py
